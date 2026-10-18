@@ -6,17 +6,17 @@
       "name": "@qmoosa/governance-protocol",
       "version": "1.0.0",
       "repository": "elon00/qmoosa-governance-protocol",
-      "sourceCommit": "52440f5f6741b21618a46626521fa9c122556e55",
+      "sourceCommit": "f421ef29da1b7abbee8cc2c2cb095f625fca0181",
       "archivePath": "packages/qmoosa-governance-protocol-1.0.0.tgz",
-      "sha256": "ee9d342bc149125aa6bd2e07062b35f66e6d8d4104d07789d1857f1f0bf59636"
+      "sha256": "1be820c8d11dd11184bf111c254bea1f868adda0ed6620794eea649e3cf4afae"
     },
     {
       "name": "@qmoosa/governance-engine",
       "version": "1.0.0",
       "repository": "elon00/qmoosa-governance-engine",
-      "sourceCommit": "5087fc90e026a35da542bececd74b3d952d9a1ee",
+      "sourceCommit": "003be21a98fc6318f9cdaf160b2934d21e379d4b",
       "archivePath": "packages/qmoosa-governance-engine-1.0.0.tgz",
-      "sha256": "49a0e2f4914b79b5bc5bf544f6f38cc938729fd63b15a804fd04c342832b9ed3"
+      "sha256": "ebfa10b130c68a4035a9b6784a8652a86fc531352adac04ba04f49146110d312"
     },
     {
       "name": "@qmoosa/governance-sdk",

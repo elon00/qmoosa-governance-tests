@@ -313,3 +313,38 @@ test('Negative Control 12: Defensive Copy Immutability Guarantee', () => {
     prop.actions[0].target = '0xHacked';
   });
 });
+
+test('Negative Control 13: Multi-Sig Emergency Guardian Sub-Threshold & Duplicate Votes', () => {
+  const G1 = '0xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+  const G2 = '0xBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB';
+  const G3 = '0xCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC';
+
+  const engine = new GovernanceEngine({
+    proposalThreshold: 100_000n * 10n ** 18n,
+    guardianSigners: [G1, G2, G3],
+    guardianThreshold: 2
+  });
+
+  engine.recordVotingPower(PROPOSER, 1, 500_000n * 10n ** 18n);
+  const proposalId = engine.createProposal({
+    proposer: PROPOSER,
+    description: 'Prop Under Guard',
+    actions: [{ target: '0xTarget', value: 0n, signature: 'test()', calldata: '0x' }],
+    currentBlock: 10,
+    currentTime: 1000
+  });
+
+  // Single vote does NOT veto proposal (sub-threshold)
+  const v1 = engine.vetoProposal(proposalId, G1, 'First vote');
+  assert.equal(v1.vetoed, false);
+  assert.equal(engine.getProposalState(proposalId, 12, 1000), ProposalState.Active);
+
+  // Duplicate vote by G1 rejected
+  assert.throws(
+    () => engine.vetoProposal(proposalId, G1, 'Duplicate vote'),
+    /ALREADY_VOTED/
+  );
+
+  // Still active
+  assert.equal(engine.getProposalState(proposalId, 12, 1000), ProposalState.Active);
+});
