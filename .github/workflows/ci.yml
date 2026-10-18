@@ -1,0 +1,85 @@
+name: Full-Spectrum Governance Reality Gates & Invariant CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  reality-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tests repository
+        uses: actions/checkout@v4
+        with:
+          path: qmoosa-governance-tests
+
+      - name: Checkout protocol repository (Pinned Commit)
+        uses: actions/checkout@v4
+        with:
+          repository: elon00/qmoosa-governance-protocol
+          ref: 52440f5f6741b21618a46626521fa9c122556e55
+          path: qmoosa-governance-protocol
+
+      - name: Checkout engine repository (Pinned Commit)
+        uses: actions/checkout@v4
+        with:
+          repository: elon00/qmoosa-governance-engine
+          ref: 5087fc90e026a35da542bececd74b3d952d9a1ee
+          path: qmoosa-governance-engine
+
+      - name: Checkout sdk repository (Pinned Commit)
+        uses: actions/checkout@v4
+        with:
+          repository: elon00/qmoosa-governance-sdk
+          ref: 220380221a6f39cff7e85186002ba0222d6f9e68
+          path: qmoosa-governance-sdk
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: qmoosa-governance-tests/package.json
+
+      - name: Install dependencies in sibling repositories
+        run: |
+          npm ci --prefix qmoosa-governance-protocol
+          npm ci --prefix qmoosa-governance-engine
+          npm ci --prefix qmoosa-governance-sdk
+
+      - name: Install dependencies in tests repository
+        working-directory: qmoosa-governance-tests
+        run: |
+          npm install
+          mkdir -p node_modules/@qmoosa/governance-protocol
+          mkdir -p node_modules/@qmoosa/governance-engine
+          mkdir -p node_modules/@qmoosa/governance-sdk
+          tar -xzf packages/qmoosa-governance-protocol-1.0.0.tgz -C node_modules/@qmoosa/governance-protocol --strip-components=1
+          tar -xzf packages/qmoosa-governance-engine-1.0.0.tgz -C node_modules/@qmoosa/governance-engine --strip-components=1
+          tar -xzf packages/qmoosa-governance-sdk-1.0.0.tgz -C node_modules/@qmoosa/governance-sdk --strip-components=1
+
+      - name: Run Source & Package Integrity Gate (Archive Mode)
+        working-directory: qmoosa-governance-tests
+        run: npm run verify:archive
+
+      - name: Run Strict Current-HEAD Alignment Gate
+        working-directory: qmoosa-governance-tests
+        run: npm run verify:current-head
+
+      - name: Run Hermetic Source Derivation & Canonical Artifact Comparison Gate
+        working-directory: qmoosa-governance-tests
+        run: npm run verify:source
+
+      - name: Run Integration Tests
+        working-directory: qmoosa-governance-tests
+        run: npm run test:integration
+
+      - name: Run Adversarial Negative Control Suite
+        working-directory: qmoosa-governance-tests
+        run: npm run test:negative
+
+      - name: Static Lint Check
+        working-directory: qmoosa-governance-tests
+        run: npm run lint

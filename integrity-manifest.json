@@ -1,0 +1,30 @@
+{
+  "mission": "QMOOSA-GOVERNANCE-01",
+  "generatedAt": "2026-10-19T00:30:00Z",
+  "packages": [
+    {
+      "name": "@qmoosa/governance-protocol",
+      "version": "1.0.0",
+      "repository": "elon00/qmoosa-governance-protocol",
+      "sourceCommit": "52440f5f6741b21618a46626521fa9c122556e55",
+      "archivePath": "packages/qmoosa-governance-protocol-1.0.0.tgz",
+      "sha256": "ee9d342bc149125aa6bd2e07062b35f66e6d8d4104d07789d1857f1f0bf59636"
+    },
+    {
+      "name": "@qmoosa/governance-engine",
+      "version": "1.0.0",
+      "repository": "elon00/qmoosa-governance-engine",
+      "sourceCommit": "5087fc90e026a35da542bececd74b3d952d9a1ee",
+      "archivePath": "packages/qmoosa-governance-engine-1.0.0.tgz",
+      "sha256": "49a0e2f4914b79b5bc5bf544f6f38cc938729fd63b15a804fd04c342832b9ed3"
+    },
+    {
+      "name": "@qmoosa/governance-sdk",
+      "version": "1.0.0",
+      "repository": "elon00/qmoosa-governance-sdk",
+      "sourceCommit": "220380221a6f39cff7e85186002ba0222d6f9e68",
+      "archivePath": "packages/qmoosa-governance-sdk-1.0.0.tgz",
+      "sha256": "95cae9842f09ca6b1443e91f43ece9ef32d739b48edb69a8bd31ef764b8e229f"
+    }
+  ]
+}
