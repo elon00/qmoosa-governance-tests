@@ -1,53 +1,5 @@
 {
-  "engine": "REA_Reverse_Engineer_Anything",
-  "status": "STRUCTURE_RECONSTRUCTED",
-  "analyzed_files": 15,
-  "manifest": {
-    "integrity-manifest.json": {
-      "bytes": 1190
-    },
-    "package-lock.json": {
-      "bytes": 1442
-    },
-    "package.json": {
-      "bytes": 1358
-    },
-    "README.md": {
-      "bytes": 1627
-    },
-    "packages\\qmoosa-governance-engine-1.0.0.tgz": {
-      "bytes": 4805
-    },
-    "packages\\qmoosa-governance-protocol-1.0.0.tgz": {
-      "bytes": 8817
-    },
-    "packages\\qmoosa-governance-sdk-1.0.0.tgz": {
-      "bytes": 2569
-    },
-    "scripts\\rea_inspector.py": {
-      "bytes": 1485
-    },
-    "scripts\\rsi_engine.py": {
-      "bytes": 2039
-    },
-    "scripts\\verify-source-integrity.mjs": {
-      "bytes": 8635
-    },
-    "tests\\integration.test.mjs": {
-      "bytes": 6321
-    },
-    "tests\\negative-control.test.mjs": {
-      "bytes": 11514
-    },
-    "tests\\reality_check_harness.py": {
-      "bytes": 1250
-    },
-    ".github\\workflows\\ci.yml": {
-      "bytes": 3141
-    },
-    ".github\\workflows\\qmoosa-rsi-rea-sync.yml": {
-      "bytes": 531
-    }
-  },
-  "timestamp": 1794022926
+  "engine": "REA_Inspector",
+  "timestamp": 1794246914,
+  "total_files": 18
 }
